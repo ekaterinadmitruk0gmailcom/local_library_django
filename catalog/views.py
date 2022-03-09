@@ -1,10 +1,11 @@
+
 import datetime
 
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from .models import Book, Author, BookInstance
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required, permission_required
 from catalog.forms import RenewBookForm
@@ -50,9 +51,7 @@ class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
 
 
 def index(request):
-    """
-    Функция отображения для домашней страницы сайта.
-    """
+
     # Генерация "количеств" некоторых главных объектов
     num_books = Book.objects.count()
     num_instances = BookInstance.objects.count()
